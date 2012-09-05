@@ -1,6 +1,12 @@
 {
-  "posts": [],
-  "tags": [],
+  "posts": [
+    "intro-to-dog"
+  ],
+  "tags": [
+    "dog",
+    "cli",
+    "nodejs"
+  ],
   "styles": [
     "code",
     "code-fixes",
