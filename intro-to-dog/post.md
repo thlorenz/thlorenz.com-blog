@@ -1,4 +1,10 @@
-# Introduction on how to use the D *eveloper Bl* OG
+# {{ meta: title }}
+
+** Created on: {{ meta: created }}**
+
+{{ meta: tags }}
+
+##  Introduction on how to use the D *eveloper Bl* OG
 
 ```js
 function goFigure () {
@@ -6,3 +12,6 @@ function goFigure () {
   return isCoolPost;
 }
 ```
+
+
+
