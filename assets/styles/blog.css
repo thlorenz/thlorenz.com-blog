@@ -1,6 +1,6 @@
 .blog-post {
   background: white;
-  padding: 10px;
+  padding: 20px;
   margin: 5px;
   border-radius: 5px;
   font-size: 16px;
@@ -105,10 +105,21 @@
   color: rgba(9, 8, 8, 0.77);
 }
 
-.blog-post ul {
-  padding-left: 5px;
-  margin-top: 15px;
+.blog-post ul, .blog-post ol, .blog-post dl {
+  margin: 0 0 0 35px;
+}
+
+.blog-post ul, .blog-post ol, .blog-post dl {
+  margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.blog-post li ul, .blog-post li ol, .blog-post li dl {
+  margin-top: 0;
+}
+
+.blog-post ul.tags {
+  margin-left: 8px
 }
 
 .blog-post .tags li {
