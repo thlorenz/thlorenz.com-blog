@@ -3,18 +3,13 @@
 {{ meta: created }}
 {{ meta: tags }}
 
-##  Introduction on how to use the D *eveloper Bl* OG
+## The blog post about the blog with which it was published
 
-This is a code sample:
+I decided that it would be the meta thing to do, so here it goes.
 
-```js
-function goFigure () {
-  var isCoolPost = true;
-  return isCoolPost;
-}
-```
+I will start with a short introduction on what DOG is, why I wrote it and then
+launch straight into a short tutorial on how to create, publish and then serve your own blog with it.
 
-More stuff here
+## How I came to write another blogging engine
 
-what the hell
-
+I feel like I need to justify this decision, since blog engines seem to be one of the things we have too much of already.
