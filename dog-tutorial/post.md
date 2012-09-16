@@ -294,10 +294,7 @@ After the blog is initialized we are ready to serve it.
 The following snippet is a bit long, but skimming it should give you a good idea how to serve your blog which at this
 point is entirely contained in memory.
 
-**Note:** some functions like `wrapnServe` have been omitted for brevity, but are included in the [availableAfter the
-blog is initialized we are ready to serve it.
-
-source](https://github.com/thlorenz/dog-example-getting-started/blob/master/app.js).
+**Note:** some functions like `wrapnServe` have been omitted for brevity, but are included in the [source](https://github.com/thlorenz/dog-example-getting-started/blob/master/app.js).
 
 {{ snippet: serve-site.js }}
 
