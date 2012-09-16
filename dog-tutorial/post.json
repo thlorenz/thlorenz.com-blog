@@ -1,11 +1,11 @@
 {
   "created": "2012-09-16T15:54:37.099Z",
-  "updated": "2012-09-16T15:54:37.099Z",
+  "updated": "2012-09-16T16:48:30.640Z",
   "tags": [
     "dog",
     "tutorial",
     "nodejs"
   ],
   "name": "dog-tutorial",
-  "title": "Getting started with the dog, a markdown based blogging engine powered by nodejs"
+  "title": "Getting started with dog, a markdown based blogging engine powered by nodejs"
 }
