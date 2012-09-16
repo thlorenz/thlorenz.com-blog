@@ -1,15 +1,11 @@
 {
   "posts": [
-    "intro-to-dog",
-    "other-intro-to-dog"
+    "dog-tutorial"
   ],
   "tags": [
     "dog",
-    "cli",
-    "nodejs",
-    "temporary",
-    "javascript",
-    "untagged"
+    "tutorial",
+    "nodejs"
   ],
   "styles": [
     "code",

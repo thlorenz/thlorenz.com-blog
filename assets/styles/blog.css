@@ -8,12 +8,12 @@
   font-family: Arial, Tahoma, Helvetica, FreeSans, sans-serif;
 }
 
-.blog-post p > code {
+.blog-post p > code{
   background: #F0F8F7;
-  border-radius: 2px;
   padding: 2px 5px 2px 5px;
-  top: -2px;
   position: relative;
+  font-family: monospace;
+  border: 1px solid #C4DBDA;
 }
 
 /* block quotes */
@@ -106,7 +106,12 @@
 }
 
 .blog-post ul, .blog-post ol, .blog-post dl {
-  margin: 0 0 0 35px;
+  margin: 0 0 0 0px;
+}
+
+.blog-post ul {
+    list-style-type: disc;
+
 }
 
 .blog-post ul, .blog-post ol, .blog-post dl {
@@ -119,7 +124,8 @@
 }
 
 .blog-post ul.tags {
-  margin-left: 8px
+  margin-left: 8px;
+  padding-left: 0px;
 }
 
 .blog-post .tags li {
