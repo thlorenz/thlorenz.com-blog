@@ -3,7 +3,9 @@
 {{ meta: created }}
 {{ meta: tags }}
 
-This is a quick introduction on what dog is and  why I wrote it, followed by a tutorial on how to create, publish and
+Dog is a markdown based blogging engine, powered by nodejs.
+
+This post will give a quick introduction on dog and why I wrote it, followed by a tutorial on how to create, publish and
 then serve your own blog with it.
 
 ## Why I created another blogging Engine
@@ -287,12 +289,14 @@ Somewhat simplified and with error handling removed that comes down to the below
 As the comments explain, we first tell dog, where our blog lives and store the actual css and all posts provided by dog
 inside `blogCss` and `posts` respectively.
 
-At that point we are ready to serve the site whose main functionality.
+After the blog is initialized we are ready to serve it.
 
-I realize that the following snippet is still quite long despite my efforts to condense it, but skimming it should give
-you a good idea how to serve your blog which at this point is entirely contained in memory.
+The following snippet is a bit long, but skimming it should give you a good idea how to serve your blog which at this
+point is entirely contained in memory.
 
-**Note:** some functions like `wrapnServe` have been omitted for brevity, but are included in the [available
+**Note:** some functions like `wrapnServe` have been omitted for brevity, but are included in the [availableAfter the
+blog is initialized we are ready to serve it.
+
 source](https://github.com/thlorenz/dog-example-getting-started/blob/master/app.js).
 
 {{ snippet: serve-site.js }}
