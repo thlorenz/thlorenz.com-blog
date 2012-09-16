@@ -3,7 +3,9 @@
 {{ meta: created }}
 {{ meta: tags }}
 
-Dog is a markdown based blogging engine, powered by nodejs.
+Dog is a markdown based blogging engine, powered by:
+
+[![nodejs](assets/images/nodejs.png)](http://nodejs.org/)
 
 This post will give a quick introduction on dog and why I wrote it, followed by a tutorial on how to create, publish and
 then serve your own blog with it.
@@ -300,8 +302,7 @@ point is entirely contained in memory.
 
 Assuming you implemented or downloaded the entire code inside 'app.js' you can now `node app` to start the server.
 
-Point your browser to `http://localhost:3000' to see a slightly modified version of the blog you are currently
-reading. Ironic isn't it?
+Point your browser to `http://localhost:3000' to see the blog you are currently reading. Ironic isn't it?
 
 ### Creating new posts
 
