@@ -3,9 +3,7 @@
 {{ meta: created }}
 {{ meta: tags }}
 
-Dog is a markdown based blogging engine, powered by:
-
-[![nodejs](assets/images/nodejs.png)](http://nodejs.org/)
+Dog is a markdown based blogging engine, powered by nodejs.
 
 This post will give a quick introduction on dog and why I wrote it, followed by a tutorial on how to create, publish and
 then serve your own blog with it.
