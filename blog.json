@@ -1,11 +1,14 @@
 {
   "posts": [
-    "dog-tutorial"
+    "dog-tutorial",
+    "if-error-abort"
   ],
   "tags": [
     "dog",
     "tutorial",
-    "nodejs"
+    "nodejs",
+    "javascript",
+    "async"
   ],
   "styles": [
     "code",
