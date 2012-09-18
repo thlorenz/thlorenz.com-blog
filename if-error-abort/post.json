@@ -1,11 +1,11 @@
 {
   "created": "2012-09-18T11:46:55.273Z",
-  "updated": "2012-09-18T11:46:55.273Z",
+  "updated": "2012-09-18T12:14:40.716Z",
   "tags": [
     "javascript",
     "async",
     "nodejs"
   ],
   "name": "if-error-abort",
-  "title": "How to make failing async request behave"
+  "title": "Handling multiple failing async requests"
 }

@@ -3,8 +3,8 @@
 {{ meta: created }}
 {{ meta: tags }}
 
-Especially when working with serverside javascript, there are a log of cases where we need to perform a set of tasks,
-each asynchronously and call back with a result when all are done.
+Especially when working with serverside javascript, there are a lot of cases where we need to perform a set of
+asynchronous tasks, and call back with a result when all are done.
 
 Lets take the example of filtering files from multiple entries.
 
@@ -25,7 +25,7 @@ If any of our `fs.stat` requests errors out, we set the abort flag and call back
 On line 9 we make sure that we don't kick off any more stat requests in case abort was signaled by a previous request
 that errored out.
 
-On line 11 we prevent requests that were pending while the first one errored out and now are calling back with an error
+On line 11 we prevent requests that were pending while the first one errored out and now are calling back with an error, 
 from activating our error handler again.
 
 It's pretty simple, but makes our code behave a lot better.
