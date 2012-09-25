@@ -9,7 +9,7 @@ function filterFiles (entries, cb) {
     if (abort) return;
     fs.stat(entry, function (err, stat) {
       if (abort) return;
-      if (err) { abort = true; cb(err); return; }
+      if (err) { abort = true; return cb(err); }
 
       if (stat.isFile()) files.push(entry);
 

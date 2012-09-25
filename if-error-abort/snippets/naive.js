@@ -6,7 +6,7 @@ function filterFiles (entries, cb) {
 
   entries.forEach(function (entry) {
     fs.stat(entry, function (err, stat) {
-      if (err) { cb(err); return; }
+      if (err) return cb(err);
 
       if (stat.isFile()) files.push(entry);
 
