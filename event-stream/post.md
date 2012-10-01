@@ -13,7 +13,7 @@ are so excited.
 It's all about piping and transforming data as found in functional languages (e.g, Haskell). 
 
 As pointed out by James Halliday (aka substack) in his [lxjs
-talk](http://www.youtube.com/watch?v=lQAV3bPOYHo&feature=plcp) this approach is also a big part of the Unix.
+talk](http://www.youtube.com/watch?v=lQAV3bPOYHo&feature=plcp) this approach is also a big part of Unix.
 
 Unix is all about using lots of tools of which each do only one small thing and string them together to archieve a bigger
 goal.
