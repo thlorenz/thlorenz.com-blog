@@ -1,14 +1,16 @@
 {
   "posts": [
     "dog-tutorial",
-    "if-error-abort"
+    "if-error-abort",
+    "event-stream"
   ],
   "tags": [
     "dog",
     "tutorial",
     "nodejs",
     "javascript",
-    "async"
+    "async",
+    "streams"
   ],
   "styles": [
     "code",

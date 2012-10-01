@@ -9,7 +9,7 @@ function objectStream () {
   var iv = setInterval(
       function () {
         s.emit('data', { id: objects, created: new Date() });
-        if (++objects === 5) {
+        if (++objects === 3) {
             s.emit('end');
             clearInterval(iv);
         }
@@ -19,7 +19,7 @@ function objectStream () {
 }
 
 function tap () {
-  return through(
+  return es.through(
     function write (data) {
       console.log('\n' + data);
       this.emit('data', data);
@@ -28,16 +28,16 @@ function tap () {
 }
 
 function padId () {
-  return mapSync(function (obj) {
+  return es.mapSync(function (obj) {
     obj.id = '000' + obj.id;
     return obj;
   });
 }
 
 objectStream()
-  .pipe(stringify())      // prepare for printing
+  .pipe(es.stringify())   // prepare for printing
   .pipe(tap())            // print intermediate result
-  .pipe(parse())          // convert back to object
+  .pipe(es.parse())       // convert back to object
   .pipe(padId())          // change it a bit
-  .pipe(stringify())      // prepare for printing
+  .pipe(es.stringify())   // prepare for printing
   .pipe(process.stdout);  // print final result

@@ -18,6 +18,9 @@
   "author": "Thorsten Lorenz",
   "license": "BSD",
   "dependencies": {
-    "event-stream": "~3.0.7"
+    "event-stream": "~3.0.7",
+    "through": "~1.1.0",
+    "split": "~0.1.0",
+    "map-stream": "0.0.1"
   }
 }

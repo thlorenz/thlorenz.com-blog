@@ -45,7 +45,7 @@ cd snippets
 
 Now you can run each snippet with `node`.
 
-Also if you have suggestions, additions or corrections, please to fork this blog. I'm open to pull requests.
+Also if you have suggestions, additions or corrections, please fork this blog. I'm open to pull requests.
 
 ## Modules that supports event-stream
 
@@ -81,7 +81,45 @@ first.
 - uses [through](https://github.com/dominictarr/through) to intercept the upstream writes
 - splits buffer using `string.split` and emits pieces separately
 
-### split through example count chars and non-empty lines
+#### Example
+
+We split a file it into separate lines and re-emit them one by one with number of characters prepended. 
+
+Additionally we keep track of the number of lines and emit that information when the read stream ends.
+
+{{ snippet: through.js }}
+
+##### Output
+
+```text
+➝  node through.js 
+chars: 33 var through =  require('through')
+chars: 31   , split   =  require('split')
+chars: 29   , fs      =  require('fs');
+chars: 0  
+chars: 19 function count () {
+chars: 15   var lines = 0
+chars: 24     , nonEmptyLines = 0;
+chars: 0  
+chars: 17   return through(
+chars: 27     function write (data) {
+chars: 14       lines++;
+chars: 37       data.length && nonEmptyLines++;
+chars: 70       this.emit('data', 'chars: ' + data.length + '\t' + data + '\n');
+chars: 5      }
+chars: 21   , function end () {
+chars: 90       this.emit('data', 'total lines: ' + lines + ' | non empty lines: ' + nonEmptyLines);
+chars: 23       this.emit('end');
+chars: 5      }
+chars: 4    );
+chars: 1  }
+chars: 0  
+chars: 54 fs.createReadStream(__filename, { encoding: 'utf-8' })
+chars: 16   .pipe(split())
+chars: 16   .pipe(count())
+chars: 24   .pipe(process.stdout);
+total lines: 25 | non empty lines: 22
+```
 
 ### [map-stream](https://github.com/dominictarr/map-stream)
 
@@ -108,7 +146,32 @@ first.
 - if the stream was paused (due to backpressure) and all inputs where mapped, the stream is `stream.drain`ed (this is
   archieved by keeping count of streamed inputs and mapped outputs)
 
-### split through example count chars filter empty lines
+#### Example
+
+Similar to above except here we filter out empty lines and don't emit the number of lines at the end.
+
+{{ snippet: map-stream.js }}
+
+##### Output:
+
+```text
+  node map-stream.js 
+chars: 34	var map   =  require('map-stream')
+chars: 29	  , split =  require('split')
+chars: 27	  , fs    =  require('fs');
+chars: 19	function count () {
+chars: 34	  return map(function (data, cb) {
+chars: 25	    // ignore empty lines
+chars: 18	    data.length ? 
+chars: 63	      cb(null, 'chars: ' + data.length + '\t' + data + '\n') : 
+chars: 11	      cb();
+chars: 5	  });
+chars: 1	}
+chars: 54	fs.createReadStream(__filename, { encoding: 'utf-8' })
+chars: 16	  .pipe(split())
+chars: 16	  .pipe(count())
+chars: 24	  .pipe(process.stdout);
+```
 
 ### [duplexer](https://github.com/Raynos/duplexer)
 
@@ -148,7 +211,7 @@ I only include it here for completeness' sake.
   - `this` is assigned to underlying stream
 - optionally takes Array of chunks which will be piped throught the stream synchronously
 
-## [event-stream](https://github.com/dominictarr/event-stream) itself
+## [event-stream](https://github.com/dominictarr/event-stream)
 
 Exposes all functions from the modules described above.
 
@@ -156,7 +219,8 @@ It also introduces additional functions. These are implemented using those modul
 
 ### [mapSync](https://github.com/dominictarr/event-stream#mapsync-syncfunction)
 
-- same as [map-stream](https://github.com/dominictarr/map-stream), but callback is called synchronously
+- same as [map-stream](https://github.com/dominictarr/map-stream), but callback is called synchronously and the given
+  function returns the result instead of calling back with it
 
 #### Under the hood
 
@@ -165,6 +229,10 @@ It also introduces additional functions. These are implemented using those modul
   - calls the map function and `stream.emit`s the returned result unless it is `undefined`
 
 #### Example
+
+Exact same as `map-stream` example above with same kind of output.
+
+{{ snippet: map-sync.js }}
 
 ### Array/String operations
 
@@ -180,7 +248,21 @@ It also introduces additional functions. These are implemented using those modul
 
 #### Example
 
-We first split the data into lines and then join them together, injecting an extra line each time:
+We first split the data into lines and then join them together, injecting an extra line each time.
+
+{{ snippet: join.js }}
+
+##### Output:
+
+```text
+➝  node join
+var join  =  require('event-stream').join
+******
+  , split =  require('split')
+******
+  , fs    =  require('fs');
+[..]
+```
 
 ### [replace](https://github.com/dominictarr/event-stream#replace-from-to)
 
@@ -188,11 +270,13 @@ We first split the data into lines and then join them together, injecting an ext
 
 #### Under the hood
 
-- pipes the stream data through `split(from)` and then `join(to)`s
+- pipes the stream data through `split(from)` and then `join(to)`s it
 
 #### Example
 
 The below has the exact same effect as the above example for `join`.
+
+{{ snippet: replace.js }
 
 ### JSON converters 
 
@@ -204,7 +288,6 @@ The below has the exact same effect as the above example for `join`.
 
 - intercepts the stream using [through](https://github.com/dominictarr/through)
 - converts `data` string to a JavaScript object via `JSON.parse` and `stream.emit`s it
-
 
 ### [stringify](https://github.com/dominictarr/event-stream#stringify)
 
@@ -221,13 +304,33 @@ The below has the exact same effect as the above example for `join`.
 
 This example should give a glimpse on how powerful streams can be.
 
-Notably, the ability to interject simple transformer functions in order to adapt outputs to inputs expected by the
+Notably, the ability to intject simple transformer functions in order to adapt outputs to inputs expected by the
 function that is next in the flow is important.
 
 This allows to compose all kinds of small functions that do one tiny thing in order to archieve quite complex tasks in a
 most performant way with the smallest memory footprint possible.
 
-The comments should suffice to show what is going on in the code:
+The comments should suffice to show what is going on in the code.
+
+{{ snippet: json.js }}
+
+##### Output:
+
+```text
+➝  node json
+
+{"id":0,"created":"2012-10-01T12:10:13.905Z"}
+
+{"id":"0000","created":"2012-10-01T12:10:13.905Z"}
+
+{"id":1,"created":"2012-10-01T12:10:13.928Z"}
+
+{"id":"0001","created":"2012-10-01T12:10:13.928Z"}
+
+{"id":2,"created":"2012-10-01T12:10:13.950Z"}
+
+{"id":"0002","created":"2012-10-01T12:10:13.950Z"}
+```
 
 ### [readable](https://github.com/dominictarr/event-stream#readable-asyncfunction)
 
@@ -255,10 +358,44 @@ The comments should suffice to show what is going on in the code:
 
 Ten Squares shows how to use plain old callback to pass on data.
 
+{{ snippet: readable-squares.js }}
+
+##### Output:
+
+```text
+➝  node readable-squares
+0
+1
+4
+9
+16
+25
+36
+49
+64
+81
+```
+
 Three Cubes shows how to manually `stream.emit` the data and then invoke the callback to be called again.
 
 Note how we can emit as many times as we like.
 
+{{ snippet: readable-cubes.js }}
+
+##### Output:
+
+```text
+➝  node readable-cubes
+"Cubing 0"
+0
+"OK"
+"Cubing 1"
+1
+"OK"
+"Cubing 2"
+8
+"OK"
+```
 
 ### [readArray](https://github.com/dominictarr/event-stream#readarray-array)
 
@@ -288,6 +425,17 @@ Note how we can emit as many times as we like.
 
 #### Example
 
+We use `readArray` to generate a stream of values which we the multiply by 10 and pipe into `writeArray` as one array,
+so we can validate the result.
+
+{{ snippet: readArray.js }}
+
+##### Output:
+
+```text
+➝  node readArray
+OK
+```
 
 ### [child](https://github.com/dominictarr/event-stream#child-child_process)
 
@@ -298,6 +446,17 @@ Note how we can emit as many times as we like.
 - creates a duplex stream from the `child.stdin` and `child.stdout`
 
 #### Example
+
+{{ snippet: child.js }}
+
+##### Output:
+
+```text
+➝  node child
+// same as: > cat thisfile | grep Stream
+fs.createReadStream(__filename)
+  .pipe(es.child(cp.exec('grep Stream')))
+```
 
 ### [wait](https://github.com/dominictarr/event-stream#wait-callback)
 
@@ -311,6 +470,15 @@ Note how we can emit as many times as we like.
 - on `stream.end` emits that string followed by `stream.end` and calls callback with the string if it was passed
 
 #### Example
+
+We emit an array of characters via `readArray` and use `wait` to aggregate them into one string so we can then surround
+it using `mapSync`.
+
+{{ snippet: wait.js }}
+
+##### Output:
+
+I leave it to the reader to find out :)
 
 ### [pipeline](https://github.com/dominictarr/event-stream#pipeline-stream1streamn)
 
@@ -340,3 +508,7 @@ es.pipeline(
   , process.stdout
 );
 ```
+
+I hope this helps to shine some light on the power and inner workings of streams and associated modules.
+
+Reading through these surely did hat for me, so I encourage you to do the same.
