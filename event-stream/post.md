@@ -47,9 +47,9 @@ Now you can run each snippet with `node`.
 
 Also if you have suggestions, additions or corrections, please fork this blog. I'm open to pull requests.
 
-## Modules that supports event-stream
+## Modules that support event-stream
 
-Event stream use and exposes a bunch of useful functions that have been split up into separate modules.
+Event stream uses and exposes a bunch of useful functions that have been split up into separate modules.
 
 This has the advantage that they can be used separately and/or swapped out as needed.
 
