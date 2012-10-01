@@ -175,7 +175,7 @@ chars: 24	  .pipe(process.stdout);
 
 ### [duplexer](https://github.com/Raynos/duplexer)
 
-- creates a duplex (readable and writable) stream from a readable and writable stream
+- creates a duplex (readable and writable) stream from a readable and a writable stream
 - `duplex (writeStream, readStream)`
 - has no dependencies
 
