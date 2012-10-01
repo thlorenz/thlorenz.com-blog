@@ -1,0 +1,23 @@
+{
+  "name": "event-stream-post",
+  "version": "0.0.0",
+  "description": "Blog about event-stream module including example snippets.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:thlorenz/thlorenz.com-blog.git"
+  },
+  "keywords": [
+    "nodejs",
+    "streams",
+    "javascript"
+  ],
+  "author": "Thorsten Lorenz",
+  "license": "BSD",
+  "dependencies": {
+    "event-stream": "~3.0.7"
+  }
+}
