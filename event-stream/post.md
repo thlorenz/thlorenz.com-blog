@@ -6,16 +6,15 @@
 Streams are the number one topic in the nodejs community this year, so I decided to get a better understanding of what
 everybody is talking about by reading through one of the most cited libraries related to streams.
 
-
 I took a look at [Dominic Tarr](https://github.com/dominictarr)'s [event-stream module](https://github.com/dominictarr/event-stream) and do understand now why people
 are so excited.
 
-It's all about piping and transforming data as found in functional languages (e.g, Haskell). 
+It's all about piping and transforming data as is common in functional languages (e.g, Haskell). 
 
 As pointed out by James Halliday (aka substack) in his [lxjs
 talk](http://www.youtube.com/watch?v=lQAV3bPOYHo&feature=plcp) this approach is also a big part of Unix.
 
-Unix is all about using lots of tools of which each do only one small thing and string them together to archieve a bigger
+Unix is all about using lots of tools - which each of which do only one small thing - and string them together to archieve a bigger
 goal.
 
 In nodejs/javascript land the tools are modules. 
@@ -28,7 +27,9 @@ API.
 Additionally if the outputs of one module don't match the inputs of the other, we can use event-stream's features to transform
 them so that they do.
 
-Finally nodejs's core modules support streams (e.g., fs, http.request), which allows to handle certain tasks via streams
+Finally nodejs's core modules support streams (e.g.,
+[fs.createReadStream](http://nodejs.org/api/fs.html#fs_fs_createreadstream_path_options)
+and [http.request](http://nodejs.org/api/http.html#http_request_pause)), which allows to handle certain tasks via streams
 from beginning to end.
 
 Below are my notes I took while reading through [event-stream](https://github.com/dominictarr/event-stream) and related
@@ -60,14 +61,13 @@ first.
 
 - shortcut to create duplex stream
 - handles pause and resume
-- optionally supply write and end methods into which underlying stream is passed via `this`
+- optionally supply `write` and `end` methods into which underlying stream is passed via `this`
 - basis for synchronous streams in event-stream
-- has no dependencies
 
 #### Under the hood
 
 - internal `stream.write` call returns `!stream.paused`
-- takes care to end and destroy underlying stream properly (ie not too soon)
+- takes care to `end` and `destroy` underlying stream properly (i.e. not prematurely)
 - `this.queue(data)` pushes data onto the `stream.buffer` and then `stream.drain`s it (unless it is paused)
 - `this.queue(null)` will emit `'end'`
 - `drain` emits all `'data'` in the buffer and finally `'end'`
@@ -89,10 +89,10 @@ Additionally we keep track of the number of lines and emit that information when
 
 {{ snippet: through.js }}
 
-##### Output
+##### Output:
 
 ```text
-➝  node through.js 
+➝  node through
 chars: 33 var through =  require('through')
 chars: 31   , split   =  require('split')
 chars: 29   , fs      =  require('fs');
@@ -124,15 +124,14 @@ total lines: 25 | non empty lines: 22
 ### [map-stream](https://github.com/dominictarr/map-stream)
 
 - takes an asnynchronous function and turns it into a through stream
-- async function has this signature: `function (data, callback) { ... }`
-- three ways to invoke callback - pretty much following accepted nodejs pattern (except last one):
+- the async function has this signature: `function (data, callback) { .. }`
+- three ways to invoke callback - pretty much following accepted nodejs pattern (except for the last one):
   - transform data:  `callback(null, transformedData)`
   - emit an error:   `callback(error)`
   - filter out data: `callback()`
 - (not documented) returning `false` from the mapping function will apply
   [backpressure](https://github.com/substack/stream-handbook#backpressure) in order to prevent upstream from emitting
   data faster than it can handle
-- has no dependencies
 
 #### Under the hood
 
@@ -143,8 +142,8 @@ total lines: 25 | non empty lines: 22
   - `next` is invoked with an error => `stream.emit('error', err)`
   - `next` is invoked with a result => `stream.emit('data', res)`
   - `next` is invoked without arguments => nothing gets emitted and therefore that piece of data gets dropped
-- if the stream was paused (due to backpressure) and all inputs where mapped, the stream is `stream.drain`ed (this is
-  archieved by keeping count of streamed inputs and mapped outputs)
+- if the stream was paused (due to backpressure) and all inputs where mapped, the stream is `drain`ed (this is archieved
+  by keeping count of streamed inputs and mapped outputs)
 
 #### Example
 
@@ -155,7 +154,7 @@ Similar to above except here we filter out empty lines and don't emit the number
 ##### Output:
 
 ```text
-  node map-stream.js 
+➝  node map-stream.js 
 chars: 34	var map   =  require('map-stream')
 chars: 29	  , split =  require('split')
 chars: 27	  , fs    =  require('fs');
@@ -175,9 +174,9 @@ chars: 24	  .pipe(process.stdout);
 
 ### [duplexer](https://github.com/Raynos/duplexer)
 
-- creates a duplex (readable and writable) stream from a readable and a writable stream
 - `duplex (writeStream, readStream)`
-- has no dependencies
+- creates a duplex (readable and writable) stream from two streams, one of which is `readable` and the other being
+  `writable` 
 
 #### Under the hood
 
@@ -194,8 +193,8 @@ chars: 24	  .pipe(process.stdout);
   - stream was paused manually
   - downstream's `stream.write()` returned false to signal that the upstream should slow down
 - if upstream buffer writes while paused, that data is pushed onto the underlying buffer
-- when stream is resumed or downstream emits `'drain'` the underlying buffer is drained
-
+- when stream is resumed or downstream emits `'drain'` the underlying buffer is drained and its data `emit`ted
+  downstream
 
 ### [from](https://github.com/dominictarr/from/blob/master/readme.markdown)
 
@@ -215,7 +214,8 @@ I only include it here for completeness' sake.
 
 Exposes all functions from the modules described above.
 
-It also introduces additional functions. These are implemented using those module functions as building blocks.
+It also introduces additional functions. Some of those are implemented using the above described module functions as
+building blocks.
 
 ### [mapSync](https://github.com/dominictarr/event-stream#mapsync-syncfunction)
 
@@ -226,7 +226,8 @@ It also introduces additional functions. These are implemented using those modul
 
 - intercepts the stream using [through](https://github.com/dominictarr/through) and does the following on
   `stream.write`:
-  - calls the map function and `stream.emit`s the returned result unless it is `undefined`
+  - calls the map function
+  - `stream.emit`s the returned result unless it is `undefined`
 
 #### Example
 
@@ -244,7 +245,8 @@ Exact same as `map-stream` example above with same kind of output.
 
 - intercepts the stream using [through](https://github.com/dominictarr/through) and does the following on
   `stream.write`:
-  - `stream.emit`s separator followd by the actual data
+  - `stream.emit`s separator
+  - `stream.emit`s the actual data
 
 #### Example
 
@@ -276,7 +278,7 @@ var join  =  require('event-stream').join
 
 The below has the exact same effect as the above example for `join`.
 
-{{ snippet: replace.js }
+{{ snippet: replace.js }}
 
 ### JSON converters 
 
@@ -304,7 +306,7 @@ The below has the exact same effect as the above example for `join`.
 
 This example should give a glimpse on how powerful streams can be.
 
-Notably, the ability to intject simple transformer functions in order to adapt outputs to inputs expected by the
+Notably, the ability to inject simple transformer functions in order to adapt outputs to inputs expected by the
 function that is next in the flow is important.
 
 This allows to compose all kinds of small functions that do one tiny thing in order to archieve quite complex tasks in a
@@ -334,7 +336,7 @@ The comments should suffice to show what is going on in the code.
 
 ### [readable](https://github.com/dominictarr/event-stream#readable-asyncfunction)
 
-- creates a readable stream from an async function
+- creates a `readable` stream from an async function
 - that stream respects `pause`
 - function has the following signature `function (count, callback) { .. }`
 - the underlying stream is passed via `this`
@@ -346,13 +348,13 @@ The comments should suffice to show what is going on in the code.
 #### Under the hood
 
 - the nodejs event loop is used to continuously poll the passed function and `stream.emit` the generated data
-- a readable stream is created to be passed into the function as `this`
-- function is polled on every `process.nextTick` unless it is currently handling a request or the stream is ended or
+- a `readable` stream is created to be passed into the function as `this`
+- the function is polled on every `process.nextTick` unless it is currently handling a request or the stream is ended or
   paused
 - when the function calls back with an error it is handled as follows:
   - if `continueOnError` is true nothing happens
   - otherwise `stream.emit('end')` is called
-- when the function calls back with data it is handled as follows it is `stream.emit`ed
+- when the function calls back with data it is `stream.emit`ted
 
 #### Example
 
@@ -399,12 +401,12 @@ Note how we can emit as many times as we like.
 
 ### [readArray](https://github.com/dominictarr/event-stream#readarray-array)
 
-- creates a readable stream from an Array
+- creates a `readable` stream from an Array
 - each item is piped separately downstream
 
 #### Under the hood
 
-- a readable stream is created
+- a `readable` stream is created
 - the array is iterated over and each item `stream.emit`ted
 - the iterating process can be interrupted when the stream ends or is paused 
 - in case the iteration was interrupted the stream a continuous attempt to resume the stream is made
@@ -412,12 +414,12 @@ Note how we can emit as many times as we like.
 
 ### [writeArray](https://github.com/dominictarr/event-stream#writearray-callback)
 
-- creates a writeable stream from a callback
+- creates a `writable` stream from a callback
 - when the upstream ends, the callback is invoked with an array into which the emitted items were buffered
 
 #### Under the hood
 
-- a writable stream and an empty array are created 
+- a `writable` stream and an empty array are created 
 - whenever a `stream.write` occurs, the written item is pushed onto the created array
 - when `stream.end` is invoked the callback is called with the buffered items
 - when an error occurs (i.e. when an attempt to destroy the stream before it was ended is made), the callback is invoked
@@ -425,8 +427,8 @@ Note how we can emit as many times as we like.
 
 #### Example
 
-We use `readArray` to generate a stream of values which we the multiply by 10 and pipe into `writeArray` as one array,
-so we can validate the result.
+We use `readArray` to generate a stream of values which we the multiply by 10 and pipe into `writeArray` so we can
+validate the resulting array.
 
 {{ snippet: readArray.js }}
 
@@ -460,14 +462,14 @@ fs.createReadStream(__filename)
 
 ### [wait](https://github.com/dominictarr/event-stream#wait-callback)
 
-- aggregates emitted chunks of a stream into a single string and emits it when the stream ends
+- aggregates `emit`ted chunks of a stream into a single string and `emit`s it when the stream `end`s
 - optionally also invokes a callback with the final string
 
 #### Under the hood
 
 - intercepts the stream using [through](https://github.com/dominictarr/through) and appends `stream.write` chunks to a
   single string
-- on `stream.end` emits that string followed by `stream.end` and calls callback with the string if it was passed
+- on `stream.end` `emit`s that string followed by `stream.end` and calls callback with the string if it was passed
 
 #### Example
 
@@ -478,7 +480,7 @@ it using `mapSync`.
 
 ##### Output:
 
-I leave it to the reader to find out :)
+I leave this one to the reader to find out :)
 
 ### [pipeline](https://github.com/dominictarr/event-stream#pipeline-stream1streamn)
 
@@ -489,7 +491,7 @@ I leave it to the reader to find out :)
 
 - creates a `duplex` stream from the first and the last stream
 - iterates through all streams and pipes adjacent ones into each other
-- sets up error handling to where an error will bubble all the way to the last stream if it is emitted from any of the
+- sets up error handling so that an error will bubble all the way to the last stream if it is emitted from any of the
   streams inside the chain
 
 #### Example
@@ -512,3 +514,10 @@ es.pipeline(
 I hope this helps to shine some light on the power and inner workings of streams and associated modules.
 
 Reading through these surely did hat for me, so I encourage you to do the same.
+
+Be on the lookout for more posts about streaming, but in the meantime I recommend the following nodejs stream resources:
+
+- substack's [stream handbook](https://github.com/substack/stream-handbook)
+- Max Ogden's [Node Streams: How do they work?](http://maxogden.com/node-streams)
+- Dominic Tarr's [High level style in JavaScript](https://gist.github.com/2401787)
+- [core stream documentation](http://nodejs.org/docs/latest/api/stream.html#stream_stream)
