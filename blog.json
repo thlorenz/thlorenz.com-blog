@@ -15,6 +15,7 @@
   "styles": [
     "code",
     "code-fixes",
+    "peacock-tango",
     "blog"
   ]
 }
