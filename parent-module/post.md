@@ -31,9 +31,7 @@ module is:
 
 So it follows that a module will have no parent if it is executed as a script.
 
-## A simple Example
-
-We can validate this with a simple example. 
+## A Simple Example
 
 We are going to use [replpad](https://github.com/thlorenz/replpad) to load
 some code and inscpect things. You can follow along by cloning this blog `git clone
