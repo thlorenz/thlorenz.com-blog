@@ -3,7 +3,7 @@
 {{ meta: created }}
 {{ meta: tags }}
 
-Here is the quick answer.
+Here is the quick answer:
 
 ```js
 var runningAsScript = !module.parent;
