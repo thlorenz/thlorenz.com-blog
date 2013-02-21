@@ -2,7 +2,8 @@
   "posts": [
     "dog-tutorial",
     "if-error-abort",
-    "event-stream"
+    "event-stream",
+    "parent-module"
   ],
   "tags": [
     "dog",
@@ -10,6 +11,7 @@
     "nodejs",
     "javascript",
     "async",
+    "replpad",
     "streams"
   ],
   "styles": [

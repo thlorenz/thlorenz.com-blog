@@ -1,0 +1,11 @@
+{
+  "created": "2013-02-21T13:53:31.593Z",
+  "updated": "2013-02-21T13:53:31.593Z",
+  "tags": [
+    "nodejs",
+    "replpad",
+    "javascript"
+  ],
+  "name": "parent-module",
+  "title": "How to detect if a nodejs module is run as a script"
+}
