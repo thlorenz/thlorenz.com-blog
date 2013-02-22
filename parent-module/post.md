@@ -3,13 +3,21 @@
 {{ meta: created }}
 {{ meta: tags }}
 
-Here is the quick answer:
+## Quick Answer
+
+### First option, recommended by the [module docs](http://nodejs.org/api/modules.html#modules_accessing_the_main_module)
+
+```js
+var runningAsScript = require.main === module;
+```
+
+### Second option, a bit shorter
 
 ```js
 var runningAsScript = !module.parent;
 ```
 
-If you want to find out why this works, read on.
+If you want to find out how the second option works, read on.
 
 ## The NodeJS Module Parameter 
 
