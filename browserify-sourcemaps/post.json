@@ -1,0 +1,12 @@
+{
+  "created": "2013-03-31T21:49:41.551Z",
+  "updated": "2013-03-31T21:49:41.551Z",
+  "tags": [
+    "nodejs",
+    "browserify",
+    "javascript",
+    "sourcemaps"
+  ],
+  "name": "browserify-sourcemaps",
+  "title": "browserify v2 adds source maps"
+}

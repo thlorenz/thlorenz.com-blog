@@ -3,7 +3,8 @@
     "dog-tutorial",
     "if-error-abort",
     "event-stream",
-    "parent-module"
+    "parent-module",
+    "browserify-sourcemaps"
   ],
   "tags": [
     "dog",
@@ -12,7 +13,9 @@
     "javascript",
     "async",
     "replpad",
-    "streams"
+    "streams",
+    "browserify",
+    "sourcemaps"
   ],
   "styles": [
     "code",
