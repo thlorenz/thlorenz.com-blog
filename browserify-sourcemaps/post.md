@@ -137,12 +137,12 @@ does with a simple `--debug` flag.
 
 There are two possibilities when bundling a file:
 
-- a) the file already contains a source map (with all its information, including the original content encoded), as would
+- a) the file already contains a source map (with all its information, including the original content), as would
   be the case if it was transpiled from another language
 - b) the file contains no source map yet
 
 If we encounter the first case, we need to decode the contained source map and offset it depending on where in the
-bundle the content of the file will end up.  If we encounter the second case, we need to generate a source map for the
+bundle the content of the file will end up. If we encounter the second case, we need to generate a source map for the
 file and offset it properly.
 
 Finally we need to combine the offset source maps of all files into one source map, encode it and append it to the bundle.
@@ -171,7 +171,7 @@ The necessary steps are as follows:
 
 - generate the bundle with source map enabled
 - before writing or serving it, rip out the contained source map
-- decode the source map in order to transform them however you please
+- decode the source map in order to transform it however you please
 - attach whatever you want in place of the source map to the bundle
 
 To simplify this I created another module, [mold-source-map](https://github.com/thlorenz/mold-source-map). It allows you
