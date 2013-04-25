@@ -4,7 +4,8 @@
     "if-error-abort",
     "event-stream",
     "parent-module",
-    "browserify-sourcemaps"
+    "browserify-sourcemaps",
+    "scriptie-talkie"
   ],
   "tags": [
     "dog",
