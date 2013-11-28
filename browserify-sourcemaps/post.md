@@ -32,7 +32,7 @@ Build your bundle as before, except pass `{ debug: true }` to the bundle functio
 browserify()
   .require(require.resolve('./main.js'), { entry: true })
   .bundle({ debug: true })
-  .pipe(fs.createWriteStream('./bundle.js));
+  .pipe(fs.createWriteStream('./bundle.js'));
 ```
 
 ### Enabling source maps in the browser
