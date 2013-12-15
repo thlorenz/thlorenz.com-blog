@@ -5,7 +5,8 @@
     "event-stream",
     "parent-module",
     "browserify-sourcemaps",
-    "scriptie-talkie"
+    "scriptie-talkie",
+    "c-include-path"
   ],
   "tags": [
     "dog",
@@ -16,7 +17,8 @@
     "replpad",
     "streams",
     "browserify",
-    "sourcemaps"
+    "sourcemaps",
+    "C"
   ],
   "styles": [
     "code",
