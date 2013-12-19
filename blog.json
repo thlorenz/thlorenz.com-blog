@@ -6,7 +6,8 @@
     "parent-module",
     "browserify-sourcemaps",
     "scriptie-talkie",
-    "c-include-path"
+    "c-include-path",
+    "local-modules-path-trick"
   ],
   "tags": [
     "dog",
@@ -18,7 +19,7 @@
     "streams",
     "browserify",
     "sourcemaps",
-    "C"
+    "c"
   ],
   "styles": [
     "code",
