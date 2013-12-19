@@ -14,7 +14,7 @@ So then you may think `var util = require('./node_modules/util')` maybe the end 
 then your `util` module may get moved up one or more directories, well and then it's not where you are trying to
 find it anymore.
 
-There is however a nice little [*trick* I found to day in one of @defunctzombie's
+There is however a nice little *trick* [I found today in one of @defunctzombie's
 modules](https://github.com/defunctzombie/commonjs-assert/blob/f8971d04cfc6a54e2a72ae45f3dd00f62fd9282d/assert.js#L25-L28)
 
 Asking for the `util` module via `var util = require('util/')` (trailing slash is important) will make nodejs load it
