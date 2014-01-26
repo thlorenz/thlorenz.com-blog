@@ -32,9 +32,9 @@ as a readonly file with filetype `man`.
 The nice thing when opening the page in vim is that you can follow links and functions simply by placing your cursor
 over the name and `CTRL-]`. You can backtrack via `CTRL-O`.
 
-This even works in MacVim (I tried id), simply replace `vim` in the function with `mvim`.
+This even works in MacVim (I tried it), simply replace `vim` in the function with `mvim`.
 
-![vman](assets/images/vman.gif)
+![vman](https://raw.github.com/thlorenz/thlorenz.com-blog/master/assets/images/vman.gif)
 
 ## pman
 
@@ -44,6 +44,6 @@ more readable at least for my eyes, but judge for yourself.
 Note that the first time you use it there is a slight delay before the page is rendered, but for all uses after that it
 comes up very quickly. I guess that some plugin is installed on first run to allow rendering postscript.
 
-![pman](assets/images/pman.png)
+![pman](https://raw.github.com/thlorenz/thlorenz.com-blog/master/assets/images/pman.png)
 
 *Please feel free to ask questions and/or leave comments [relating to this post](https://github.com/thlorenz/thlorenz.com-blog/issues/5).*
