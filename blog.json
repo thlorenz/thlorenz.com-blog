@@ -8,7 +8,8 @@
     "scriptie-talkie",
     "c-include-path",
     "local-modules-path-trick",
-    "viewing-man-pages"
+    "viewing-man-pages",
+    "live-editing-browserify"
   ],
   "tags": [
     "dog",
@@ -21,7 +22,9 @@
     "browserify",
     "sourcemaps",
     "c",
-    "unix"
+    "unix",
+    "chrome",
+    "devtools"
   ],
   "styles": [
     "code",

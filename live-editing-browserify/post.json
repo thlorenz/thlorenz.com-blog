@@ -1,0 +1,12 @@
+{
+  "created": "2014-01-30T02:43:37.044Z",
+  "updated": "2014-01-30T02:43:37.044Z",
+  "tags": [
+    "browserify",
+    "javascript",
+    "chrome",
+    "devtools"
+  ],
+  "name": "live-editing-browserify",
+  "title": "Live edit browserified code in chrome devtools"
+}
