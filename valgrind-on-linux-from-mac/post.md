@@ -6,7 +6,9 @@
 ## valgrind doesn't love your Mac as much as you do
 
 So you decided to write some C/C++ and you want to do so on your Mac since you like the gestures and/or other niceties
-that a Linux distro can't give you? Well, given you are on OSX 10.9.x (Mavericks) you'll soon find, that [valgrind is not
+that a Linux distro can't give you? 
+
+Well, given you are on OSX 10.9.x (Mavericks) you'll soon find, that [valgrind is not
 supported there yet](https://bugs.kde.org/show_bug.cgi?id=326724). This will eventually get fixed, but by then the next
 OSX version will be out and you will want to upgrade - only to face the same problem all over again
 
