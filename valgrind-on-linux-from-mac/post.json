@@ -1,0 +1,13 @@
+{
+  "created": "2014-02-17T21:19:36.866Z",
+  "updated": "2014-02-17T21:19:36.866Z",
+  "tags": [
+    "c",
+    "valgrind",
+    "mac",
+    "unix",
+    "make"
+  ],
+  "name": "valgrind-on-linux-from-mac",
+  "title": "Run valgrind from your Mac via a remote Linux machine"
+}

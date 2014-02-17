@@ -9,7 +9,8 @@
     "c-include-path",
     "local-modules-path-trick",
     "viewing-man-pages",
-    "live-editing-browserify"
+    "live-editing-browserify",
+    "valgrind-on-linux-from-mac"
   ],
   "tags": [
     "dog",
@@ -24,7 +25,10 @@
     "c",
     "unix",
     "chrome",
-    "devtools"
+    "devtools",
+    "valgrind",
+    "mac",
+    "make"
   ],
   "styles": [
     "code",
