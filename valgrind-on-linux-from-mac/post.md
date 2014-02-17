@@ -35,7 +35,7 @@ machine every time you save. Therefore there is no way to quickly see/open relat
 Additionally it is annoying that the local files of your project keep going out of sync with the ones on your remote
 machine.
 
-### `rsync` your project and run `valgrind` with one simple `make` target -> *perfect*
+### `rsync` your project `valgrind` it via a simple `make` target -> *perfect*
 
 Now this worked just perfect for me. Here is the gist:
 
