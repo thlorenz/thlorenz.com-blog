@@ -15,9 +15,11 @@ OSX version will be out and you will want to upgrade - only to face the same pro
 ## The Best of Both Worlds
 
 There is a way to work around this issue by running `valgrind` against your code on a linux machine, virtual or
-whatever, but keep developing on your Mac. I happen to have a desktop lying around, which I bought a month before realizing that
-Windows stinks (entirely different story) and after trying twice to hackintosh it, I installed Ubuntu on it. I figured I
-could use it to develop/test my C code which was leaking memory allover the place.
+whatever, but keep developing on your Mac. 
+
+I happen to have a desktop lying around, which I bought a month before realizing that Windows stinks (entirely different
+story) and after trying twice to hackintosh it, I installed Ubuntu. So I figured I could use it to develop/test my C
+code which was leaking memory allover the place.
 
 I tried a few different options and list them here for reference along with the reason why they didn't cut it for me,
 followed by the final option which worked just perfect.
